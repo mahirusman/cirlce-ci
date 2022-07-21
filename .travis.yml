@@ -8,7 +8,7 @@ before_install:
   - docker build -t usmanbrackets/docker-react -f Dockerfile.dev .
 
 script:
-  - docker run usmanbrackets/docker-react npm run test -- --coverage
+  - docker run -e CI=true usmanbrackets/docker-react npm run test -- --coverage
 
 
 deploy:
