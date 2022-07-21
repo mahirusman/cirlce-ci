@@ -1,0 +1,26 @@
+sudo: required
+
+services:
+  - docker
+
+
+before_install:
+  - docker build -t usmanbrackets/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run usmanbrackets/docker-react npm run test -- --coverage
+
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-1
+  app: "Docker"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-us-east-1-979081741284"
+  bucket_path: "Docker"
+  on:
+    branch: master
+ access_key_id:
+    secure: "AKIA6H5ORYPSM3B5GOM2"
+  secret_access_key:
+    secure: "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"
